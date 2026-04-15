@@ -1,0 +1,42 @@
+[
+  {
+    "id": "z1",
+    "name": "Biblioteca Ágora",
+    "description": "Un espacio diseñado para la concentración profunda y la investigación colaborativa. Cuenta con amplios ventanales que permiten el ingreso de luz natural, zonas de lectura silenciosa y salas de estudio grupal.",
+    "image": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80",
+    "audio": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "category": "Académico",
+    "lat": 3.353648,
+    "lng": -76.521534
+  },
+  {
+    "id": "z2",
+    "name": "Plazoleta Central",
+    "description": "El corazón vibrante de la universidad. Un punto de encuentro al aire libre donde convergen estudiantes de todas las facultades. Ideal para el descanso entre clases y eventos culturales espontáneos.",
+    "image": "https://images.unsplash.com/photo-1525926476834-8c8872e41113?auto=format&fit=crop&w=1200&q=80",
+    "audio": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+    "category": "Social",
+    "lat": 3.353200,
+    "lng": -76.521200
+  },
+  {
+    "id": "z3",
+    "name": "Complejo Deportivo",
+    "description": "Instalaciones de primer nivel que incluyen canchas múltiples, pista atlética y gimnasio. Un entorno dinámico que fomenta la disciplina, la salud física y el espíritu de equipo universitario.",
+    "image": "https://images.unsplash.com/photo-1526676037777-05a232554f77?auto=format&fit=crop&w=1200&q=80",
+    "audio": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+    "category": "Deportivo",
+    "lat": 3.354000,
+    "lng": -76.522000
+  },
+  {
+    "id": "z4",
+    "name": "Edificio UAO Labs",
+    "description": "El epicentro tecnológico de la UAO.\n\n🔵 Nivel 1 Oeste:\n- Dir. Administrativa, USU, Jóvenes Investigadores, Publicaciones, Salas Generales.\n- Labs: Física, Optoelectrónica, Biomédica.\n\n🔵 Nivel 1 Este:\n- Labs: Mercados Financieros, Innolab, Infolab, Química, Micropropagación, Análisis Térmico, Bioprocesos, Ambientales.\n- Depósito CPMA, Salas MAC, Audiolab.\n\n🔵 Nivel 2 Oeste:\n- Labs: Ing. Industrial, Electrónica, Automática, Robótica, Conversión de Energía, IA e Ing. Datos, Laboratorio Vivo, Sinapsis.\n\n🔵 Nivel 2 Este:\n- Labs: Medialab, Cámara de Gesell, Biomecánica, Fablab, Ing. Mecánica, Idiomas, CPMA.\n- Noticiero 90 Minutos.",
+    "image": "https://www.uao.edu.co/wp-content/uploads/2021/04/Laboratorios-UAO.jpg",
+    "audio": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+    "category": "Académico",
+    "lat": 3.354500,
+    "lng": -76.520500
+  }
+]

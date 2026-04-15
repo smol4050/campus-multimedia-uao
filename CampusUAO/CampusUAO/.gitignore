@@ -1,0 +1,17 @@
+# ==========================================
+# IGNORAR ARCHIVOS DE VISUAL STUDIO Y .NET
+# ==========================================
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.db
+*.sqlite
+appsettings.Development.json
+
+# ==========================================
+# IGNORAR ARCHIVOS DE SISTEMA OPERATIVO
+# ==========================================
+.DS_Store
+Thumbs.db

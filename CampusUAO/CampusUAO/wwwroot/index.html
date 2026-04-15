@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explora el Campus UAO</title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="loader" class="loader-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <section id="home-screen" class="home-screen active">
+        <div class="home-bg-image"></div>
+        <div class="home-content glass-panel-heavy">
+            <h1 class="home-title">Explora el Campus UAO</h1>
+            <p class="home-subtitle">Descubre la identidad sensorial, visual y sonora de nuestra universidad a través de un recorrido interactivo.</p>
+            <button id="btn-explore" class="btn-primary">
+                <span>Explorar ahora</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+        </div>
+    </section>
+
+    <div id="app" class="app-container hidden">
+
+        <header class="glass-header">
+            <div class="header-content">
+                <h1>Campus UAO</h1>
+                <p>Memoria sensorial interactiva</p>
+            </div>
+            <button id="theme-toggle" aria-label="Cambiar tema" class="icon-btn">☀️</button>
+        </header>
+
+        <nav id="filters-container" class="filters-bar">
+        </nav>
+
+        <main class="app-layout">
+
+            <aside id="sidebar" class="sidebar">
+                <div id="zones-list" class="zones-list">
+                </div>
+            </aside>
+
+            <section id="content" class="main-content">
+                <div id="empty-state" class="empty-state active">
+                    <span class="empty-icon">📍</span>
+                    <h2>Selecciona una zona</h2>
+                    <p>Explora la lista o el mapa para ver los detalles y escuchar su ambiente.</p>
+                </div>
+
+                <article id="zone-detail" class="zone-card hidden glass-panel">
+                    <span id="zone-category" class="badge"></span>
+                    <h2 id="zone-title"></h2>
+
+                    <div class="image-wrapper">
+                        <img id="zone-image" src="" alt="Vista de la zona" loading="lazy">
+                    </div>
+
+                    <p id="zone-description" class="description"></p>
+
+                    <div class="audio-player">
+                        <p class="audio-label">🎧 Escucha el ambiente:</p>
+                        <audio id="zone-audio" controls controlsList="nodownload"></audio>
+                    </div>
+                </article>
+            </section>
+
+            <aside id="minimap-column" class="minimap-column">
+                <div class="minimap-header">
+                    <h3>Ubicación</h3>
+                </div>
+
+                <div id="minimap-wrapper" class="minimap-wrapper glass-panel">
+                    <div class="minimap-glass-overlay"></div>
+
+                    <div id="map-container" style="width: 100%; height: 100%; z-index: 1;"></div>
+
+                    <button id="btn-close-map" class="btn-close-map hidden" aria-label="Cerrar mapa">&times;</button>
+                </div>
+
+                <button id="btn-fullscreen-map" class="btn-secondary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+                    Abrir mapa completo
+                </button>
+            </aside>
+
+        </main>
+    </div>
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
