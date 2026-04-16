@@ -19,8 +19,8 @@
   },
   {
     "id": "z2",
-    "name": "Cafeterías UAO",
-    "description": "Punto de encuentro gastronómico...",
+    "name": "Cafeterías uao",
+    "description": "Punto de encuentro gastronómico del campus.\n\n📍 Distribución:\n\nPrimer Piso\n- Escaladas Café\n- Petete's\n- Caffesabor\n- Inajar\n\nSegundo Piso\n- Green Point\n\nTercer Piso\n- Mr. Fruit & Gourmet",
     "link": "https://sitios.uao.edu.co/cafeterias/",
     "images": [
       "assets/images/Cafeteria_1.JPG",
@@ -37,7 +37,7 @@
   },
   {
     "id": "z3",
-    "name": "Edificio UAO Labs",
+    "name": "Edificio uao Labs",
     "description": "El epicentro tecnológico de la UAO.\n\n🔵 Nivel 1 Oeste:\n- Dir. Administrativa, USU, Jóvenes Investigadores, Publicaciones.\n- Labs: Física, Optoelectrónica, Biomédica.\n\n🔵 Nivel 1 Este:\n- Labs: Mercados Financieros, Innolab, Infolab, Química, Micropropagación, Análisis Térmico, Bioprocesos, Ambientales.\n\n🔵 Nivel 2 Oeste:\n- Labs: Ing. Industrial, Electrónica, Automática, Robótica, IA.\n\n🔵 Nivel 2 Este:\n- Labs: Medialab, Cámara de Gesell, Biomecánica, Fablab, Noticiero 90 Minutos.",
     "link": "https://www.uao.edu.co/uao-labs/laboratorios-uao/",
     "images": [

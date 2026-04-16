@@ -191,7 +191,8 @@ h1, h2, h3, h4 {
         transform: translateY(-2px);
     }
 
-/* Header & Filters */
+/* ================= HEADER CORREGIDO ================= */
+
 .app-container {
     height: 100%;
     display: flex;
@@ -201,57 +202,57 @@ h1, h2, h3, h4 {
 .glass-header {
     background: var(--bg-surface);
     padding: 14px 28px;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
+    position: relative; /* CLAVE PARA CENTRADO */
+
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     border-bottom: 1px solid var(--border);
     box-shadow: var(--shadow-sm);
 }
 
+/* LOGO IZQUIERDA */
 .header-brand {
     display: flex;
     align-items: center;
     gap: 12px;
+    z-index: 2; /* evita que lo tape el texto */
 }
 
-/* CENTRO REAL */
+.header-logo {
+    height: 40px;
+    width: auto;
+}
+
+/* TEXTO CENTRADO REAL */
 .header-content {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
+    max-width: 60%; /* evita que invada todo */
+    pointer-events: none; /* no bloquea clicks */
 }
 
-/* empuja logo a la izquierda */
-.header-brand {
-    justify-self: start;
-}
+    .header-content h1 {
+        font-size: 1.5rem;
+        color: var(--primary);
+        font-weight: 700;
+        letter-spacing: -0.5px;
+    }
 
-/* centra texto REAL */
-.header-content {
-    justify-self: center;
-}
+    .header-content p {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+    }
 
-/* toggle a la derecha */
+/* TOGGLE DERECHA */
 #theme-toggle {
-    justify-self: end;
+    margin-left: auto;
+    z-index: 2; /* encima del texto */
 }
 
-.header-brand {
-    flex: 1;
-    min-width: 0;
-}
-
-.header-content h1 {
-    text-transform: lowercase;
-    font-size: 1.3rem;
-    color: var(--primary);
-    font-weight: 700;
-    letter-spacing: -0.5px;
-}
-
-.header-content p {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-}
-
+/* BOTONES GENERALES */
 .icon-btn {
     background: var(--bg-hover);
     border: 1px solid var(--border);
@@ -664,7 +665,7 @@ audio {
     justify-content: center;
     box-shadow: var(--shadow-md);
 }
-/* ================= ECLIPSE TOGGLE (UAO HEADER VERSION) ================= */
+/* ================= ECLIPSE TOGGLE FIX REALISTA ================= */
 
 .toggle9 {
     width: 90px;
@@ -678,7 +679,7 @@ audio {
     transition: all 1s cubic-bezier(.65,0,.35,1);
 }
 
-/* SUN */
+/* ================= SUN ================= */
 .sun {
     position: absolute;
     width: 30px;
@@ -692,36 +693,39 @@ audio {
     z-index: 2;
 }
 
-/* MOON */
+/* ================= MOON ================= */
 .moon {
     position: absolute;
     width: 30px;
     height: 30px;
     border-radius: 50%;
     top: 4px;
-    left: -40px;
+    left: -40px; /* empieza FUERA */
+
     background: #0b0f1a;
     z-index: 3;
-    transition: all 1s cubic-bezier(.65,0,.35,1);
+    transition: all 0.9s cubic-bezier(.65,0,.35,1);
 }
 
-/* DARK MODE */
+/* ================= DARK MODE ================= */
 .toggle9.active {
     background: linear-gradient(120deg,#020409,#1a1f2e);
 }
 
-    /* MOVIMIENTO */
+    /* 1️⃣ PRIMERO se mueve el sol */
     .toggle9.active .sun {
         left: 52px;
         filter: brightness(0.2);
         box-shadow: 0 0 6px rgba(255,255,255,0.2);
     }
 
+    /* 2️⃣ DESPUÉS entra la luna */
     .toggle9.active .moon {
         left: 52px;
+        transition-delay: 0.05s; /* 🔥 CLAVE */
     }
 
-/* CORONA */
+/* ================= CORONA ================= */
 .corona {
     position: absolute;
     width: 30px;
@@ -730,35 +734,40 @@ audio {
     top: 4px;
     left: 52px;
     opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
+/* aparece SOLO cuando ya ocurrió el eclipse */
 .toggle9.active .corona {
     opacity: 1;
+    transition-delay: 0.7s; /* 🔥 sincronizado */
     box-shadow: 0 0 6px #fff, 0 0 20px var(--primary), 0 0 40px rgba(226,6,19,0.4);
 }
 
-/* ATMOSPHERE */
+/* ================= ATMOSPHERE ================= */
 .atmosphere {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(226,6,19,0.25), transparent 60% );
+    background: linear-gradient(to top, rgba(226,6,19,0.25), transparent 60%);
     opacity: 0;
     transition: opacity 0.8s ease;
 }
 
 .toggle9.active .atmosphere {
     opacity: 1;
+    transition-delay: 0.5s;
 }
 
-/* STARS */
+/* ================= STARS ================= */
 .stars {
     position: absolute;
     inset: 0;
     opacity: 0;
-    transition: opacity 1.5s ease;
+    transition: opacity 1.2s ease;
     background: radial-gradient(circle at 20% 30%, white 1px, transparent 2px), radial-gradient(circle at 60% 50%, white 1px, transparent 2px);
 }
 
 .toggle9.active .stars {
     opacity: 0.3;
+    transition-delay: 0.6s;
 }
