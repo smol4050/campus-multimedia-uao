@@ -194,20 +194,26 @@ h1, h2, h3, h4 {
 
 .glass-header {
     background: var(--bg-surface);
-    padding: 16px 40px;
+    padding: 14px 28px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
     border-bottom: 1px solid var(--border);
     z-index: 10;
     box-shadow: var(--shadow-sm);
 }
 
+.header-brand {
+    flex: 1;
+    min-width: 0;
+}
+
 .header-content h1 {
-    font-size: 1.5rem;
+    text-transform: lowercase;
+    font-size: 1.3rem;
     color: var(--primary);
     font-weight: 700;
-    text-transform: uppercase;
     letter-spacing: -0.5px;
 }
 
@@ -627,4 +633,67 @@ audio {
     align-items: center;
     justify-content: center;
     box-shadow: var(--shadow-md);
+}
+/* ===== FIX TOGGLE ECLIPSE ===== */
+
+#theme-toggle.toggle9 {
+    width: 64px;
+    height: 32px;
+    border-radius: 50px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    display: inline-block;
+    /* evita estilos heredados */
+    border: none;
+}
+
+/* SOL */
+.toggle9 .sun {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    top: 4px;
+    left: 4px;
+    background: radial-gradient(circle, #fff, #ffcccc, var(--primary));
+    transition: 0.6s;
+}
+
+/* LUNA */
+.toggle9 .moon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    top: 4px;
+    left: -30px;
+    background: var(--bg-base);
+    transition: 0.6s;
+}
+
+/* ESTADO DARK */
+.toggle9.active .sun {
+    left: 36px;
+    filter: brightness(0.2);
+}
+
+.toggle9.active .moon {
+    left: 36px;
+}
+
+/* CORONA */
+.toggle9 .corona {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 4px;
+    left: 36px;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.toggle9.active .corona {
+    opacity: 1;
+    box-shadow: 0 0 6px #fff, 0 0 18px var(--primary);
 }

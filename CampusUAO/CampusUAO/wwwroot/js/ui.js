@@ -47,22 +47,25 @@ export const toggleFullscreenMap = (isFullscreen) => {
     }
 };
 
+
 export const initThemeUI = () => {
     const savedTheme = localStorage.getItem('uao-theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
     if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
         document.body.classList.add('dark');
-        DOM.themeToggle.textContent = '☀️';
-    } else {
-        DOM.themeToggle.textContent = '🌙';
+        DOM.themeToggle.classList.add('active');
     }
 };
 
 export const toggleThemeUI = () => {
     document.body.classList.toggle('dark');
+
     const isDark = document.body.classList.contains('dark');
+
+    DOM.themeToggle.classList.toggle('active', isDark);
+
     localStorage.setItem('uao-theme', isDark ? 'dark' : 'light');
-    DOM.themeToggle.textContent = isDark ? '☀️' : '🌙';
 };
 
 /* ================= UI ================= */
