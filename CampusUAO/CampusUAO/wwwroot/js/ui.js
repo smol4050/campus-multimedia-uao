@@ -118,51 +118,101 @@ export const renderZoneDetailUI = (zone) => {
     DOM.zTitle.textContent = zone.name;
     DOM.zDesc.textContent = zone.description;
 
-    // --- LÓGICA DUAL DE MEDIOS (IMAGEN VS VIDEO) ---
-    let activeMediaElement = null;
+    const gallery = document.getElementById("media-gallery");
+    gallery.innerHTML = "";
 
-    if (zone.video) {
-        DOM.zVideo.src = zone.video;
-        DOM.zVideo.classList.remove('hidden');
-        DOM.zImage.classList.add('hidden');
-        activeMediaElement = DOM.zVideo;
-    } else {
-        DOM.zImage.src = zone.image;
-        DOM.zImage.alt = `Vista de ${zone.name}`;
-        DOM.zImage.classList.remove('hidden');
-        DOM.zVideo.classList.add('hidden');
-        // Pausamos el video si estaba sonando otro
-        DOM.zVideo.pause();
-        DOM.zVideo.src = '';
-        activeMediaElement = DOM.zImage;
+    let mediaItems = [];
+
+    if (zone.images) {
+        zone.images.forEach(img => {
+            mediaItems.push({ type: "image", src: img });
+        });
     }
 
-    // Enlace forzado
+    if (zone.videos) {
+        zone.videos.forEach(video => {
+            mediaItems.push({ type: "video", src: video });
+        });
+    }
+
+    let currentIndex = 0;
+
+    const renderSlides = () => {
+        gallery.innerHTML = mediaItems.map((item, i) => {
+            if (item.type === "image") {
+                return `
+                    <div class="media-slide ${i === 0 ? 'active' : ''}">
+                        <img src="${item.src}">
+                    </div>
+                `;
+            } else {
+                return `
+                    <div class="media-slide ${i === 0 ? 'active' : ''}">
+                        <video autoplay loop muted playsinline>
+                            <source src="${item.src}" type="video/mp4">
+                        </video>
+                    </div>
+                `;
+            }
+        }).join("");
+
+        gallery.innerHTML += `
+            <div class="gallery-controls">
+                <button class="gallery-btn" id="prev-btn">‹</button>
+                <button class="gallery-btn" id="next-btn">›</button>
+            </div>
+            <div class="gallery-dots">
+                ${mediaItems.map((_, i) => `<span class="${i === 0 ? 'active' : ''}"></span>`).join("")}
+            </div>
+        `;
+    };
+
+    const updateSlide = () => {
+        const slides = gallery.querySelectorAll(".media-slide");
+        const dots = gallery.querySelectorAll(".gallery-dots span");
+
+        slides.forEach((s, i) => {
+            s.classList.toggle("active", i === currentIndex);
+        });
+
+        dots.forEach((d, i) => {
+            d.classList.toggle("active", i === currentIndex);
+        });
+    };
+
+    renderSlides();
+
+    gallery.addEventListener("click", (e) => {
+        if (e.target.id === "next-btn") {
+            currentIndex = (currentIndex + 1) % mediaItems.length;
+            updateSlide();
+        }
+
+        if (e.target.id === "prev-btn") {
+            currentIndex = (currentIndex - 1 + mediaItems.length) % mediaItems.length;
+            updateSlide();
+        }
+    });
+
+    // AUTO SLIDE
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % mediaItems.length;
+        updateSlide();
+    }, 4000);
+
+    // LINK
     if (zone.link) {
         DOM.zLink.href = zone.link;
         DOM.zLink.classList.remove('hidden');
         DOM.zLink.style.display = 'inline-flex';
     } else {
         DOM.zLink.classList.add('hidden');
-        DOM.zLink.style.display = 'none';
     }
 
-    // --- ANIMACIONES ASIGNADAS AL ELEMENTO ACTIVO (Video o Imagen) ---
-    activeMediaElement.className = '';
-    void activeMediaElement.offsetWidth;
-
-    if (zone.id === 'z1') activeMediaElement.classList.add('anim-focus');
-    else if (zone.id === 'z2') activeMediaElement.classList.add('anim-energy');
-    else if (zone.id === 'z3') activeMediaElement.classList.add('anim-tech');
-
-    // Audio
+    // AUDIO
     DOM.zAudio.src = zone.audio;
     DOM.zAudio.load();
 
-    DOM.emptyState.classList.remove('active');
     DOM.emptyState.classList.add('hidden');
     DOM.zoneDetail.classList.remove('hidden');
-    DOM.zoneDetail.style.animation = 'none';
-    DOM.zoneDetail.offsetHeight;
-    DOM.zoneDetail.style.animation = null;
 };
