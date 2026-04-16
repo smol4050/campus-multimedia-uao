@@ -4,7 +4,14 @@
     "name": "CRAI (Biblioteca)",
     "description": "Centro de Recursos para el Aprendizaje y la Investigación.\n\n📍 Ubicación: Edificio Central - Ala Sur/Este.\nUn espacio diseñado para la concentración profunda y la investigación colaborativa. Cuenta con amplios ventanales que permiten el ingreso de luz natural y zonas de lectura silenciosa.",
     "link": "https://www.uao.edu.co/biblioteca/",
-    "image": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80",
+    "images": [
+      "assets/images/Cafeteria_1.JPG",
+      "assets/images/Cafeteria_2.JPG"
+    ],
+    "videos": [
+      "assets/videos/Cafeteria_1.mp4",
+      "assets/videos/Cafeteria_2.mp4"
+    ],
     "audio": "assets/audio/a.mp3",
     "category": "Académico",
     "lat": 3.353467934693791,
@@ -13,22 +20,34 @@
   {
     "id": "z2",
     "name": "Cafeterías UAO",
-    "description": "El punto de encuentro ideal para recargar energías con una amplia variedad gastronómica.\n\n☕ Primer Piso:\n- Escaladas Café\n- Petete´s\n- Caffesabor\n- Inajar\n\n🥗 Segundo Piso:\n- Green Point\n\n🥪 Tercer Piso:\n- Mr. Fruit & Gourmet",
+    "description": "Punto de encuentro gastronómico...",
     "link": "https://sitios.uao.edu.co/cafeterias/",
-    "image": "assets/images/Cafeteria_2.JPG",
-    "video": "assets/videos/Cafeteria_1.MOV",
+    "images": [
+      "assets/images/Cafeteria_1.JPG",
+      "assets/images/Cafeteria_2.JPG"
+    ],
+    "videos": [
+      "assets/videos/Cafeteria_1.mp4",
+      "assets/videos/Cafeteria_2.mp4"
+    ],
     "audio": "assets/audio/a.mp3",
     "category": "Social",
-    "lat": 3.3535227917082033,
-    "lng": -76.52075294829802
+    "lat": 3.353522,
+    "lng": -76.520752
   },
   {
     "id": "z3",
     "name": "Edificio UAO Labs",
     "description": "El epicentro tecnológico de la UAO.\n\n🔵 Nivel 1 Oeste:\n- Dir. Administrativa, USU, Jóvenes Investigadores, Publicaciones.\n- Labs: Física, Optoelectrónica, Biomédica.\n\n🔵 Nivel 1 Este:\n- Labs: Mercados Financieros, Innolab, Infolab, Química, Micropropagación, Análisis Térmico, Bioprocesos, Ambientales.\n\n🔵 Nivel 2 Oeste:\n- Labs: Ing. Industrial, Electrónica, Automática, Robótica, IA.\n\n🔵 Nivel 2 Este:\n- Labs: Medialab, Cámara de Gesell, Biomecánica, Fablab, Noticiero 90 Minutos.",
     "link": "https://www.uao.edu.co/uao-labs/laboratorios-uao/",
-    "image": "https://www.uao.edu.co/wp-content/uploads/2021/04/Laboratorios-UAO.jpg",
-    "video": "assets/videos/Labs.MOV",
+    "images": [
+      "assets/images/Cafeteria_1.JPG",
+      "assets/images/Cafeteria_2.JPG"
+    ],
+    "videos": [
+      "assets/videos/Labs.mp4",
+      "assets/videos/Cafeteria_2.mp4"
+    ],
     "audio": "assets/audio/a.mp3",
     "category": "Académico",
     "lat": 3.3536748605340994,
