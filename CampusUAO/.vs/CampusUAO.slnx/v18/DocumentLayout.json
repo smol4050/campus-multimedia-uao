@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Stiven\\source\\repos\\campus-multimedia-uao\\CampusUAO\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8D598B00-732D-08BE-9283-0D8155E14C28}|CampusUAO\\CampusUAO.csproj|c:\\users\\stiven\\source\\repos\\campus-multimedia-uao\\campusuao\\campusuao\\campusuao.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{8D598B00-732D-08BE-9283-0D8155E14C28}|CampusUAO\\CampusUAO.csproj|solutionrelative:campusuao\\campusuao.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8D598B00-732D-08BE-9283-0D8155E14C28}|CampusUAO\\CampusUAO.csproj|c:\\users\\stiven\\source\\repos\\campus-multimedia-uao\\campusuao\\campusuao\\wwwroot\\js\\main.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{8D598B00-732D-08BE-9283-0D8155E14C28}|CampusUAO\\CampusUAO.csproj|solutionrelative:campusuao\\wwwroot\\js\\main.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
@@ -37,10 +41,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{8D598B00-732D-08BE-9283-0D8155E14C28}|CampusUAO\\CampusUAO.csproj|c:\\users\\stiven\\source\\repos\\campus-multimedia-uao\\campusuao\\campusuao\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8D598B00-732D-08BE-9283-0D8155E14C28}|CampusUAO\\CampusUAO.csproj|solutionrelative:campusuao\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8D598B00-732D-08BE-9283-0D8155E14C28}|CampusUAO\\CampusUAO.csproj|c:\\users\\stiven\\source\\repos\\campus-multimedia-uao\\campusuao\\campusuao\\campusuao.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{8D598B00-732D-08BE-9283-0D8155E14C28}|CampusUAO\\CampusUAO.csproj|solutionrelative:campusuao\\campusuao.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,11 +50,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ui.js",
               "DocumentMoniker": "C:\\Users\\Stiven\\source\\repos\\campus-multimedia-uao\\CampusUAO\\CampusUAO\\wwwroot\\js\\ui.js",
               "RelativeDocumentMoniker": "CampusUAO\\wwwroot\\js\\ui.js",
@@ -66,7 +66,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "modal.js",
               "DocumentMoniker": "C:\\Users\\Stiven\\source\\repos\\campus-multimedia-uao\\CampusUAO\\CampusUAO\\wwwroot\\js\\modal.js",
               "RelativeDocumentMoniker": "CampusUAO\\wwwroot\\js\\modal.js",
@@ -78,20 +78,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "main.js",
               "DocumentMoniker": "C:\\Users\\Stiven\\source\\repos\\campus-multimedia-uao\\CampusUAO\\CampusUAO\\wwwroot\\js\\main.js",
               "RelativeDocumentMoniker": "CampusUAO\\wwwroot\\js\\main.js",
               "ToolTip": "C:\\Users\\Stiven\\source\\repos\\campus-multimedia-uao\\CampusUAO\\CampusUAO\\wwwroot\\js\\main.js",
               "RelativeToolTip": "CampusUAO\\wwwroot\\js\\main.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEkAAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAACMAAAAAAAAAAAAAAEkAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2026-04-14T04:57:03.061Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "map.js",
               "DocumentMoniker": "C:\\Users\\Stiven\\source\\repos\\campus-multimedia-uao\\CampusUAO\\CampusUAO\\wwwroot\\js\\map.js",
               "RelativeDocumentMoniker": "CampusUAO\\wwwroot\\js\\map.js",
@@ -103,7 +103,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "api.js",
               "DocumentMoniker": "C:\\Users\\Stiven\\source\\repos\\campus-multimedia-uao\\CampusUAO\\CampusUAO\\wwwroot\\js\\api.js",
               "RelativeDocumentMoniker": "CampusUAO\\wwwroot\\js\\api.js",
@@ -115,7 +115,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Stiven\\source\\repos\\campus-multimedia-uao\\CampusUAO\\CampusUAO\\Program.cs",
               "RelativeDocumentMoniker": "CampusUAO\\Program.cs",
@@ -127,7 +127,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "zones.json",
               "DocumentMoniker": "C:\\Users\\Stiven\\source\\repos\\campus-multimedia-uao\\CampusUAO\\CampusUAO\\wwwroot\\data\\zones.json",
               "RelativeDocumentMoniker": "CampusUAO\\wwwroot\\data\\zones.json",
@@ -139,7 +139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "styles.css",
               "DocumentMoniker": "C:\\Users\\Stiven\\source\\repos\\campus-multimedia-uao\\CampusUAO\\CampusUAO\\wwwroot\\css\\styles.css",
               "RelativeDocumentMoniker": "CampusUAO\\wwwroot\\css\\styles.css",
@@ -151,7 +151,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "index.html",
               "DocumentMoniker": "C:\\Users\\Stiven\\source\\repos\\campus-multimedia-uao\\CampusUAO\\CampusUAO\\wwwroot\\index.html",
               "RelativeDocumentMoniker": "CampusUAO\\wwwroot\\index.html",
@@ -163,7 +163,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 0,
               "Title": "CampusUAO.csproj",
               "DocumentMoniker": "C:\\Users\\Stiven\\source\\repos\\campus-multimedia-uao\\CampusUAO\\CampusUAO\\CampusUAO.csproj",
               "RelativeDocumentMoniker": "CampusUAO\\CampusUAO.csproj",
@@ -171,7 +171,8 @@
               "RelativeToolTip": "CampusUAO\\CampusUAO.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-04-14T02:44:10.303Z"
+              "WhenOpened": "2026-04-14T02:44:10.303Z",
+              "EditorCaption": ""
             }
           ]
         }
