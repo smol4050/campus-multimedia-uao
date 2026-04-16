@@ -13,53 +13,58 @@
     zDesc: document.getElementById('zone-description'),
     zAudio: document.getElementById('zone-audio'),
     zLink: document.getElementById('zone-link'),
-    audioVisualizer: document.getElementById('audio-visualizer')
+    audioVisualizer: document.getElementById('audio-visualizer'),
+    minimapWrapper: document.getElementById('minimap-wrapper'),
+    btnCloseMap: document.getElementById('btn-close-map')
 };
 
 let galleryInterval = null;
+let currentVideo = null;
 
-// Quita el cargador al inicio
-export const hideLoader = () => {
-    if (DOM.loader) {
-        DOM.loader.classList.add('hidden');
-    }
-};
+/* ================= AUDIO ================= */
+DOM.zAudio.addEventListener('play', () => DOM.audioVisualizer.classList.add('active'));
+DOM.zAudio.addEventListener('pause', () => DOM.audioVisualizer.classList.remove('active'));
+DOM.zAudio.addEventListener('ended', () => DOM.audioVisualizer.classList.remove('active'));
 
-// Pasa de la pantalla de inicio a la app
+/* ================= BASICS ================= */
+export const hideLoader = () => setTimeout(() => DOM.loader.classList.add('hidden'), 600);
+
 export const showApp = () => {
-    DOM.homeScreen.classList.remove('active');
     DOM.homeScreen.classList.add('hidden');
     DOM.appContainer.classList.remove('hidden');
 };
 
+export const toggleFullscreenMap = (isFullscreen) => {
+    if (isFullscreen) {
+        DOM.minimapWrapper.classList.add('fullscreen');
+        DOM.btnCloseMap.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    } else {
+        DOM.minimapWrapper.classList.remove('fullscreen');
+        DOM.btnCloseMap.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+};
+
 export const initThemeUI = () => {
-    const isDark = localStorage.getItem('uao-theme') === 'dark';
-    if (isDark) document.body.classList.add('dark');
+    const savedTheme = localStorage.getItem('uao-theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.body.classList.add('dark');
+        DOM.themeToggle.textContent = '☀️';
+    } else {
+        DOM.themeToggle.textContent = '🌙';
+    }
 };
 
 export const toggleThemeUI = () => {
-    const isDark = document.body.classList.toggle('dark');
+    document.body.classList.toggle('dark');
+    const isDark = document.body.classList.contains('dark');
     localStorage.setItem('uao-theme', isDark ? 'dark' : 'light');
+    DOM.themeToggle.textContent = isDark ? '☀️' : '🌙';
 };
 
-// CARRUSEL DE BIENVENIDA (ORIGINAL)
-export const renderWelcomeCarousel = (zones, onZoneSelect) => {
-    if (!DOM.welcomeCarousel) return;
-    DOM.welcomeCarousel.innerHTML = '';
-    zones.forEach(zone => {
-        const card = document.createElement('div');
-        card.className = 'carousel-card';
-        card.innerHTML = `
-            <img src="${zone.images?.[0] || zone.image}" class="carousel-img">
-            <div class="carousel-info">
-                <span>${zone.category}</span>
-                <h4>${zone.name}</h4>
-            </div>
-        `;
-        card.onclick = () => onZoneSelect(zone.id);
-        DOM.welcomeCarousel.appendChild(card);
-    });
-};
+/* ================= UI ================= */
 
 export const renderFiltersUI = (categories, currentFilter, onFilterClick) => {
     DOM.filtersContainer.innerHTML = '';
@@ -77,75 +82,121 @@ export const renderZonesListUI = (zones, activeZoneId, onZoneSelect) => {
     zones.forEach(zone => {
         const btn = document.createElement('button');
         btn.className = `zone-item ${zone.id === activeZoneId ? 'active' : ''}`;
-        btn.innerHTML = `<strong>${zone.name}</strong><br><small>${zone.category}</small>`;
+        btn.innerHTML = `<span>${zone.name}</span>`;
         btn.onclick = () => onZoneSelect(zone.id);
         DOM.zonesList.appendChild(btn);
     });
 };
 
-// DETALLE DE ZONA (VIDEO CORREGIDO + BOTÓN LINK)
+export const renderWelcomeCarousel = (zones, onZoneSelect) => {
+    DOM.welcomeCarousel.innerHTML = '';
+    zones.forEach(zone => {
+        const card = document.createElement('div');
+        card.className = 'carousel-card';
+        card.innerHTML = `<img src="${zone.images?.[0] || zone.image}">`;
+        card.onclick = () => onZoneSelect(zone.id);
+        DOM.welcomeCarousel.appendChild(card);
+    });
+};
+
+/* ================= GALERÍA PRO ================= */
+
 export const renderZoneDetailUI = (zone) => {
-    if (galleryInterval) clearInterval(galleryInterval);
-
-    DOM.zTitle.textContent = zone.name;
-    DOM.zDesc.textContent = zone.description;
-    DOM.zCategory.textContent = zone.category;
-
-    // Mostrar/Ocultar Link
-    if (zone.link) {
-        DOM.zLink.href = zone.link;
-        DOM.zLink.style.display = 'inline-flex';
-    } else {
-        DOM.zLink.style.display = 'none';
+    clearInterval(galleryInterval);
+    if (currentVideo) {
+        currentVideo.pause();
+        currentVideo = null;
     }
 
-    DOM.zAudio.src = zone.audio || '';
-    DOM.zAudio.load();
+    DOM.zCategory.textContent = zone.category;
+    DOM.zTitle.textContent = zone.name;
+    DOM.zDesc.textContent = zone.description;
 
-    const gallery = document.getElementById('media-gallery');
-    gallery.innerHTML = '';
+    const gallery = document.getElementById("media-gallery");
+    gallery.innerHTML = "";
 
-    const media = [];
-    if (zone.images) zone.images.forEach(i => media.push({ type: 'img', src: i }));
-    if (zone.videos) zone.videos.forEach(v => media.push({ type: 'vid', src: v }));
+    let media = [];
 
-    let currentIdx = 0;
+    if (zone.images) {
+        zone.images.forEach(i => media.push({ type: 'image', src: i }));
+    }
+
+    if (zone.videos) {
+        zone.videos.forEach(v => media.push({ type: 'video', src: v }));
+    }
+
+    let index = 0;
 
     const render = () => {
-        gallery.innerHTML = `
-            <div id="slides-wrapper">
-                ${media.map((m, i) => `
-                    <div class="media-slide ${i === 0 ? 'active' : ''}">
-                        ${m.type === 'img' ? `<img src="${m.src}">` : `<video src="${m.src}" autoplay muted loop playsinline></video>`}
-                    </div>
-                `).join('')}
+        gallery.innerHTML = media.map((m, i) => `
+            <div class="media-slide ${i === 0 ? 'active' : ''}">
+                ${m.type === 'image'
+                ? `<img src="${m.src}">`
+                : `<video muted playsinline preload="auto">
+                        <source src="${m.src}" type="video/mp4">
+                   </video>`}
             </div>
-            <div class="gallery-controls">
-                <button class="gallery-btn" id="prev-slide">❮</button>
-                <button class="gallery-btn" id="next-slide">❯</button>
-            </div>
+        `).join('') + `
+        <div class="gallery-controls">
+            <button class="gallery-btn" id="prev">‹</button>
+            <button class="gallery-btn" id="next">›</button>
+        </div>
         `;
     };
 
-    if (media.length > 0) {
-        render();
-        const slides = gallery.querySelectorAll('.media-slide');
-        const update = (step) => {
-            slides[currentIdx].classList.remove('active');
-            currentIdx = (currentIdx + step + media.length) % media.length;
-            slides[currentIdx].classList.add('active');
-        };
-        gallery.querySelector('#next-slide').onclick = () => update(1);
-        gallery.querySelector('#prev-slide').onclick = () => update(-1);
-        galleryInterval = setInterval(() => update(1), 4000);
+    const update = () => {
+        const slides = gallery.querySelectorAll(".media-slide");
+        slides.forEach((s, i) => s.classList.toggle("active", i === index));
+
+        const active = slides[index];
+        const video = active.querySelector("video");
+
+        if (video) {
+            currentVideo = video;
+            video.currentTime = 0;
+            video.play().catch(() => { });
+
+            video.onended = () => {
+                next();
+            };
+        } else {
+            currentVideo = null;
+            galleryInterval = setTimeout(next, 3000);
+        }
+    };
+
+    const next = () => {
+        clearTimeout(galleryInterval);
+        index = (index + 1) % media.length;
+        update();
+    };
+
+    const prev = () => {
+        clearTimeout(galleryInterval);
+        index = (index - 1 + media.length) % media.length;
+        update();
+    };
+
+    render();
+    update();
+
+    gallery.onclick = (e) => {
+        if (e.target.id === "next") next();
+        if (e.target.id === "prev") prev();
+    };
+
+    /* LINK */
+    if (zone.link) {
+        DOM.zLink.href = zone.link;
+        DOM.zLink.classList.remove('hidden');
+    } else {
+        DOM.zLink.classList.add('hidden');
     }
+
+    /* AUDIO */
+    DOM.zAudio.src = zone.audio;
+    DOM.zAudio.load();
 
     DOM.emptyState.classList.add('hidden');
     DOM.zoneDetail.classList.remove('hidden');
-};
-
-// Necesaria para el botón de cerrar mapa si main.js la llama
-export const toggleFullscreenMap = (isFullscreen) => {
-    const wrapper = document.getElementById('minimap-wrapper');
-    if (wrapper) wrapper.classList.toggle('fullscreen', isFullscreen);
 };
