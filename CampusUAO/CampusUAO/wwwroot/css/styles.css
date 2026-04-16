@@ -35,7 +35,8 @@ body.dark {
 
 html, body {
     height: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 body {
@@ -770,4 +771,124 @@ audio {
 .toggle9.active .stars {
     opacity: 0.3;
     transition-delay: 0.6s;
+}
+
+@media (max-width: 900px) {
+
+    /* ===== LAYOUT BASE ===== */
+    .app-layout {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+    }
+
+    /* ===== HEADER ===== */
+    .glass-header {
+        padding: 10px 16px;
+    }
+
+    .header-content {
+        max-width: 55%;
+    }
+
+        .header-content h1 {
+            font-size: 1rem;
+        }
+
+        .header-content p {
+            font-size: 0.7rem;
+        }
+
+    .toggle9 {
+        transform: scale(0.75);
+    }
+
+    /* ===== FILTROS ===== */
+    .filters-bar {
+        padding: 10px 12px;
+        gap: 8px;
+    }
+
+    .filter-btn {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+
+    /* ===== SIDEBAR SCROLL UX PRO (CON MÁSCARA REAL) ===== */
+    .sidebar {
+        max-height: 200px;
+        overflow-y: auto;
+        padding-right: 6px;
+        scroll-behavior: smooth;
+        /* 🔥 FADE REAL */
+        -webkit-mask-image: linear-gradient( to bottom, transparent 0%, black 12%, black 85%, transparent 100% );
+        mask-image: linear-gradient( to bottom, transparent 0%, black 12%, black 85%, transparent 100% );
+    }
+
+    .zone-item {
+        margin-bottom: 10px;
+    }
+
+    /* ===== CONTENIDO ===== */
+    .main-content {
+        width: 100%;
+        padding: 16px;
+        align-items: stretch;
+    }
+
+    .empty-state {
+        height: auto;
+        padding-bottom: 20px;
+    }
+
+        .empty-state h2 {
+            font-size: 1.5rem;
+        }
+
+    /* ===== CARDS ===== */
+    .zone-card {
+        width: 100%;
+        padding: 20px;
+        margin-top: 12px;
+        border-radius: 16px;
+    }
+
+    #zone-title {
+        font-size: 1.4rem;
+    }
+
+    .description {
+        font-size: 0.9rem;
+    }
+
+    /* ===== GALERÍA ===== */
+    .media-gallery {
+        height: 220px;
+    }
+
+    /* ===== CARRUSEL ===== */
+    .carousel-card {
+        flex: 0 0 180px;
+    }
+
+    .carousel-img {
+        height: 110px;
+    }
+
+    /* ===== MAPA ===== */
+    .minimap-column {
+        width: 100%;
+        padding: 16px;
+        border: none;
+    }
+
+    .minimap-wrapper {
+        height: 200px;
+        border-radius: 12px;
+    }
+
+    #btn-fullscreen-map {
+        width: 100%;
+        font-size: 0.85rem;
+    }
 }
