@@ -1,246 +1,137 @@
-﻿/* ==========================================================================
-   Variables & Temas (Material Design & UAO Colors)
-   ========================================================================== */
-:root {
+﻿:root {
     --primary: #E20613;
     --primary-hover: #b3000b;
-    --accent: #ff3342;
     --bg-base: #f5f5f5;
-    --bg-surface: #ffffff;
-    --bg-surface-solid: #ffffff;
-    --bg-hover: #f0f0f0;
+    --bg-surface: rgba(255, 255, 255, 0.95);
     --text-main: #212121;
     --text-muted: #757575;
     --border: #e0e0e0;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    --shadow-md: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    --shadow-lg: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    --shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
 body.dark {
-    --primary: #ff4d58;
-    --primary-hover: #ff737b;
-    --accent: #E20613;
     --bg-base: #121212;
-    --bg-surface: #1e1e1e;
-    --bg-surface-solid: #1e1e1e;
-    --bg-hover: #2c2c2c;
+    --bg-surface: rgba(30, 30, 30, 0.95);
     --text-main: #ffffff;
     --text-muted: #b0b0b0;
     --border: #333333;
 }
 
-/* ==========================================================================
-   Base
-   ========================================================================== */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-html, body {
-    height: 100%;
+body {
+    font-family: 'Roboto', sans-serif;
+    background: var(--bg-base);
+    color: var(--text-main);
+    height: 100vh;
     overflow: hidden;
 }
 
-body {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    background-color: var(--bg-base);
-    color: var(--text-main);
-    transition: background-color 0.4s, color 0.4s;
-}
-
-h1, h2, h3, h4 {
-    font-weight: 500;
-}
-
-::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #bdbdbd;
-    border-radius: 10px;
-}
-
-.hidden {
-    display: none !important;
-}
-
-.mt-4 {
-    margin-top: 24px;
-}
-
-.glass-panel {
-    background: var(--bg-surface);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-sm);
-}
-
-/* Loader & Home Screen */
-.loader-overlay {
-    position: fixed;
-    inset: 0;
-    background: var(--bg-base);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100000;
-    transition: 0.5s;
-}
-
-.spinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid var(--border);
-    border-top-color: var(--primary);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
+/* --- HOME SCREEN --- */
 .home-screen {
     position: fixed;
     inset: 0;
-    z-index: 50000;
+    z-index: 2000;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: opacity 0.5s ease;
 }
 
 .home-bg-image {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(226, 6, 19, 0.9), rgba(33, 33, 33, 0.8)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1920&q=80') center/cover;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1920');
+    background-size: cover;
+    background-position: center;
     z-index: -1;
 }
 
 .home-content {
     text-align: center;
-    padding: 60px 40px;
-    border-radius: 16px;
+    padding: 3rem;
     max-width: 600px;
-    color: #ffffff;
-    background: rgba(33,33,33,0.9);
-    box-shadow: var(--shadow-lg);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow);
 }
 
-.btn-primary {
-    background: var(--primary);
-    color: #ffffff;
-    border: none;
-    padding: 16px 36px;
-    border-radius: 8px;
-    cursor: pointer;
-    text-transform: uppercase;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
+.home-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: white;
 }
 
-/* ==========================================================================
-   App Layout & Sidebar
-   ========================================================================== */
+.home-subtitle {
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+/* --- APP LAYOUT --- */
 .app-container {
-    height: 100%;
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
-
-.glass-header {
-    background: var(--bg-surface);
-    padding: 16px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--border);
-    z-index: 100;
-}
-
-.filters-bar {
-    background: var(--bg-surface);
-    border-bottom: 1px solid var(--border);
-    padding: 12px 40px;
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-}
-
-.filter-btn {
-    background: var(--bg-base);
-    border: 1px solid var(--border);
-    padding: 8px 16px;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-    .filter-btn.active {
-        background: var(--primary);
-        color: white;
-    }
 
 .app-layout {
     display: grid;
-    grid-template-columns: 280px 1fr 380px;
+    grid-template-columns: 300px 1fr 350px;
     flex: 1;
     overflow: hidden;
 }
 
 .sidebar {
-    background: var(--bg-surface-solid);
     border-right: 1px solid var(--border);
-    padding: 20px;
+    background: var(--bg-surface);
     overflow-y: auto;
+    padding: 1rem;
 }
 
-.zone-item {
-    width: 100%;
-    padding: 16px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    margin-bottom: 8px;
-    cursor: pointer;
-    text-align: left;
-    background: transparent;
+.main-content {
+    padding: 2rem;
+    overflow-y: auto;
+    position: relative;
 }
 
-    .zone-item.active {
-        border-left: 6px solid var(--primary);
-        background: var(--bg-hover);
-    }
+.minimap-column {
+    padding: 1rem;
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
 
-/* ==========================================================================
-   Galería Multimedia (CORREGIDO)
-   ========================================================================== */
+/* --- GALERÍA (FIXED) --- */
 .media-gallery {
     position: relative;
     width: 100%;
-    height: 320px;
+    height: 350px;
+    background: #000;
     border-radius: 12px;
     overflow: hidden;
-    background: #000;
-    margin-bottom: 24px;
+    margin: 1.5rem 0;
 }
 
 .media-slide {
     position: absolute;
     inset: 0;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.6s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 1;
 }
 
     .media-slide.active {
         opacity: 1;
-        z-index: 2;
+        z-index: 5;
     }
 
     .media-slide img, .media-slide video {
@@ -249,120 +140,77 @@ h1, h2, h3, h4 {
         object-fit: cover;
     }
 
-/* Controles sobre la imagen */
 .gallery-controls {
     position: absolute;
     inset: 0;
-    z-index: 20; /* Mayor que las slides */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 15px;
-    pointer-events: none; /* Deja pasar clics al fondo si no es en botones */
+    padding: 0 1rem;
+    z-index: 50; /* Por encima de los slides */
+    pointer-events: none;
 }
 
 .gallery-btn {
-    pointer-events: auto; /* Botones sí reciben clics */
-    background: rgba(0,0,0,0.5);
-    border: none;
+    pointer-events: auto;
+    background: rgba(0,0,0,0.4);
     color: white;
-    font-size: 2rem;
-    width: 45px;
-    height: 45px;
+    border: none;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 1.2rem;
+    transition: 0.3s;
 }
+
+    .gallery-btn:hover {
+        background: var(--primary);
+    }
 
 .gallery-dots {
     position: absolute;
     bottom: 15px;
     width: 100%;
-    z-index: 25;
-    text-align: center;
-    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    z-index: 60;
 }
 
 .dot {
-    display: inline-block;
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.4);
-    margin: 0 5px;
+    background: rgba(255,255,255,0.3);
     cursor: pointer;
-    pointer-events: auto;
-    transition: 0.3s;
 }
 
     .dot.active {
-        background: var(--primary);
-        transform: scale(1.3);
+        background: white;
+        transform: scale(1.2);
     }
 
-/* Animaciones de Visualizador */
-.visualizer {
+/* --- UTILS --- */
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    cursor: pointer;
     display: flex;
-    gap: 4px;
-    align-items: flex-end;
-    height: 20px;
-    opacity: 0;
+    align-items: center;
+    gap: 10px;
+    margin: 0 auto;
 }
 
-    .visualizer.active {
-        opacity: 1;
-    }
-
-    .visualizer span {
-        width: 4px;
-        background: var(--primary);
-        height: 4px;
-    }
-
-    .visualizer.active span {
-        animation: jump 0.5s infinite alternate ease-in-out;
-    }
-
-@keyframes jump {
-    from {
-        height: 4px;
-    }
-
-    to {
-        height: 20px;
-    }
+.hidden {
+    display: none !important;
 }
 
-/* Mapa y Responsive */
-.minimap-wrapper {
-    height: 320px;
-    position: relative;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-@media (max-width: 992px) {
-    .app-layout {
-        display: flex;
-        flex-direction: column;
-        overflow: auto;
-    }
-
-    .sidebar {
-        position: sticky;
-        top: 0;
-        z-index: 50;
-    }
-
-    .zones-list {
-        display: flex;
-        gap: 10px;
-        overflow-x: auto;
-    }
-
-    .zone-item {
-        min-width: 200px;
-    }
+.glass-panel {
+    background: var(--bg-surface);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border);
 }
