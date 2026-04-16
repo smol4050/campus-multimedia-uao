@@ -1,18 +1,14 @@
-﻿/* ==========================================================================
-   Variables & Temas (Material Design & UAO Colors)
-   ========================================================================== */
-:root {
-    --primary: #E20613; /* Rojo UAO Sólido */
+﻿:root {
+    --primary: #E20613;
     --primary-hover: #b3000b;
     --accent: #ff3342;
-    --bg-base: #f5f5f5; /* Gris claro Material */
-    --bg-surface: #ffffff; /* Blanco Sólido Material */
+    --bg-base: #f5f5f5;
+    --bg-surface: #ffffff;
     --bg-surface-solid: #ffffff;
     --bg-hover: #f0f0f0;
     --text-main: #212121;
     --text-muted: #757575;
     --border: #e0e0e0;
-    /* Sombras clásicas Material Design */
     --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     --shadow-md: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     --shadow-lg: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -22,8 +18,8 @@ body.dark {
     --primary: #ff4d58;
     --primary-hover: #ff737b;
     --accent: #E20613;
-    --bg-base: #121212; /* Material Dark */
-    --bg-surface: #1e1e1e; /* Material Dark Surface */
+    --bg-base: #121212;
+    --bg-surface: #1e1e1e;
     --bg-surface-solid: #1e1e1e;
     --bg-hover: #2c2c2c;
     --text-main: #ffffff;
@@ -31,9 +27,6 @@ body.dark {
     --border: #333333;
 }
 
-/* ==========================================================================
-   Base
-   ========================================================================== */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -45,7 +38,6 @@ html, body {
     overflow: hidden;
 }
 
-/* Fuente Roboto Light (300) como pide la rúbrica */
 body {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
@@ -63,10 +55,6 @@ h1, h2, h3, h4 {
     height: 6px;
 }
 
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
 ::-webkit-scrollbar-thumb {
     background: #bdbdbd;
     border-radius: 10px;
@@ -82,11 +70,28 @@ h1, h2, h3, h4 {
     margin-top: 24px;
 }
 
-/* Adios al Glassmorphism, Hola Material Design Sólido */
 .glass-panel {
     background: var(--bg-surface);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-sm);
+}
+
+/* Logos */
+.home-logo {
+    width: 180px;
+    height: auto;
+    margin-bottom: 24px;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.header-logo {
+    height: 40px;
+    width: auto;
 }
 
 /* Loader & Home Screen */
@@ -131,10 +136,6 @@ h1, h2, h3, h4 {
     inset: 0;
     background: linear-gradient(135deg, rgba(226, 6, 19, 0.9), rgba(33, 33, 33, 0.8)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1920&q=80') center/cover;
     z-index: -1;
-}
-
-body.dark .home-bg-image {
-    background: linear-gradient(135deg, rgba(18, 18, 18, 0.95), rgba(33, 33, 33, 0.9)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1920&q=80') center/cover;
 }
 
 .home-content {
@@ -298,19 +299,7 @@ body.dark .home-bg-image {
         border-left: 6px solid var(--primary);
     }
 
-.zone-item-title {
-    font-weight: 500;
-    font-size: 1.05rem;
-}
-
-.zone-item-cat {
-    font-size: 0.8rem;
-    color: var(--primary);
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-/* Main Content & Empty State */
+/* Main Content */
 .main-content {
     padding: 40px;
     overflow-y: auto;
@@ -329,10 +318,6 @@ body.dark .home-bg-image {
     text-align: center;
     width: 100%;
 }
-
-    .empty-state.active {
-        animation: fadeIn 0.4s;
-    }
 
     .empty-state h2 {
         font-size: 2rem;
@@ -400,7 +385,82 @@ body.dark .home-bg-image {
         text-transform: uppercase;
     }
 
-/* Tarjeta de Detalles */
+/* Galería */
+.media-gallery {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.media-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 1;
+}
+
+    .media-slide.active {
+        opacity: 1;
+        z-index: 2;
+    }
+
+    .media-slide img, .media-slide video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+    }
+
+.gallery-controls {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+}
+
+.gallery-btn {
+    background: rgba(0,0,0,0.5);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.gallery-dots {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    z-index: 10;
+    text-align: center;
+    pointer-events: none;
+}
+
+.dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+    .dot.active {
+        background: var(--primary);
+        transform: scale(1.3);
+    }
+
+/* Detalles */
 .zone-card {
     width: 100%;
     max-width: 680px;
@@ -408,7 +468,6 @@ body.dark .home-bg-image {
     border-radius: 12px;
     padding: 32px;
     box-shadow: var(--shadow-md);
-    animation: slideUp 0.4s forwards;
 }
 
 .badge {
@@ -429,35 +488,12 @@ body.dark .home-bg-image {
     margin-bottom: 24px;
 }
 
-.image-wrapper {
-    width: 100%;
-    height: 320px;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 24px;
-    background: var(--border);
-    position: relative;
-}
-
-/* Imágenes y Videos (Soporte Dual) */
-#zone-image, #zone-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
 .description {
     font-size: 1.05rem;
     line-height: 1.7;
     color: var(--text-muted);
     margin-bottom: 24px;
     white-space: pre-wrap;
-}
-
-/* Botones & Actions */
-.actions-wrapper {
-    margin-bottom: 24px;
-    display: flex;
 }
 
 .btn-secondary {
@@ -483,7 +519,7 @@ body.dark .home-bg-image {
         border-color: var(--primary);
     }
 
-/* Audio Player & Visualizer */
+/* Audio & Visualizer */
 .audio-player {
     background: var(--bg-surface-solid);
     padding: 20px;
@@ -508,7 +544,6 @@ body.dark .home-bg-image {
 audio {
     width: 100%;
     height: 40px;
-    outline: none;
 }
 
 .visualizer {
@@ -529,27 +564,23 @@ audio {
         background: var(--primary);
         border-radius: 2px;
         height: 4px;
+        animation: jump 0.5s infinite alternate ease-in-out;
+        animation-play-state: paused;
     }
 
     .visualizer.active span {
-        animation: jump 0.5s infinite alternate ease-in-out;
+        animation-play-state: running;
     }
 
-    .visualizer span:nth-child(2) {
-        animation-delay: 0.1s;
+@keyframes jump {
+    from {
+        height: 4px;
     }
 
-    .visualizer span:nth-child(3) {
-        animation-delay: 0.2s;
+    to {
+        height: 20px;
     }
-
-    .visualizer span:nth-child(4) {
-        animation-delay: 0.3s;
-    }
-
-    .visualizer span:nth-child(5) {
-        animation-delay: 0.4s;
-    }
+}
 
 /* Minimap */
 .minimap-column {
@@ -596,283 +627,4 @@ audio {
     align-items: center;
     justify-content: center;
     box-shadow: var(--shadow-md);
-}
-
-.map-btn {
-    justify-content: center;
-    width: 100%;
-}
-
-/* Custom Mapbox GL JS Popups */
-.custom-map-popup .mapboxgl-popup-content {
-    background: var(--bg-surface-solid);
-    color: var(--text-main);
-    border-radius: 8px;
-    padding: 10px 15px;
-    font-weight: 500;
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--border);
-}
-
-.custom-map-popup .mapboxgl-popup-tip {
-    border-top-color: var(--bg-surface-solid);
-    border-bottom-color: var(--bg-surface-solid);
-}
-
-/* ==========================================================================
-   Animaciones Únicas por Zona
-   ========================================================================== */
-@keyframes focusZoom {
-    0% {
-        transform: scale(1.15);
-        filter: blur(8px) brightness(1.2);
-        opacity: 0.5;
-    }
-
-    100% {
-        transform: scale(1);
-        filter: blur(0) brightness(1);
-        opacity: 1;
-    }
-}
-
-.anim-focus {
-    animation: focusZoom 1.2s ease-out forwards;
-}
-
-@keyframes energyPop {
-    0% {
-        transform: scale(0.6) rotate(-3deg);
-        opacity: 0;
-    }
-
-    70% {
-        transform: scale(1.05) rotate(1deg);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(1) rotate(0);
-        opacity: 1;
-    }
-}
-
-.anim-energy {
-    animation: energyPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-
-@keyframes glitchTech {
-    0% {
-        opacity: 0;
-        transform: skewX(15deg);
-        filter: contrast(150%) hue-rotate(90deg);
-    }
-
-    30% {
-        opacity: 1;
-        transform: skewX(-5deg);
-        filter: contrast(120%) hue-rotate(-45deg);
-    }
-
-    60% {
-        transform: skewX(2deg);
-        filter: contrast(100%) hue-rotate(0);
-    }
-
-    100% {
-        transform: skewX(0);
-    }
-}
-
-.anim-tech {
-    animation: glitchTech 0.6s ease-out forwards;
-}
-
-@keyframes jump {
-    0% {
-        height: 4px;
-    }
-
-    100% {
-        height: 20px;
-    }
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-/* FIX GALERÍA: Se define una altura sólida y se gestionan capas */
-.media-gallery {
-    position: relative;
-    width: 100%;
-    height: 380px; /* Aumentado para mejor visualización */
-    border-radius: 12px;
-    overflow: hidden;
-    background: #000;
-    margin-bottom: 24px;
-    box-shadow: var(--shadow-md);
-}
-
-.media-slide {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 0.6s ease-in-out;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-    .media-slide.active {
-        opacity: 1;
-        z-index: 2;
-    }
-
-    /* IMPORTANTE: pointer-events: none evita que el contenido multimedia bloquee clics */
-    .media-slide img,
-    .media-slide video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        pointer-events: none;
-    }
-
-/* CONTROLES: Z-index superior y pointer-events: none para el contenedor */
-.gallery-controls {
-    position: absolute;
-    inset: 0;
-    z-index: 50; /* Muy por encima de las diapositivas */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px;
-    pointer-events: none; /* Permite que el clic pase a través del contenedor vacío */
-}
-
-/* BOTONES: Recuperan el pointer-events para ser clickeables */
-.gallery-btn {
-    pointer-events: auto;
-    background: rgba(0, 0, 0, 0.4);
-    border: none;
-    color: white;
-    font-size: 2rem;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.3s;
-}
-
-    .gallery-btn:hover {
-        background: var(--primary);
-        transform: scale(1.1);
-    }
-
-/* DOTS: Indicadores de posición */
-.gallery-dots {
-    position: absolute;
-    bottom: 15px;
-    width: 100%;
-    z-index: 60;
-    text-align: center;
-    pointer-events: none;
-}
-
-.dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 50%;
-    margin: 0 5px;
-    cursor: pointer;
-    pointer-events: auto;
-    transition: 0.3s;
-}
-
-    .dot.active {
-        background: var(--primary);
-        transform: scale(1.3);
-    }
-
-/* ==========================================================================
-   Responsive Mobile
-   ========================================================================== */
-@media (max-width: 992px) {
-    body, html {
-        overflow: auto;
-        height: auto;
-        min-height: 100vh;
-    }
-
-    .app-container {
-        height: auto;
-    }
-
-    .app-layout {
-        display: flex;
-        flex-direction: column;
-        overflow: visible;
-    }
-
-    .sidebar {
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        padding: 16px 20px;
-        background: var(--bg-surface);
-        position: sticky;
-        top: 0;
-        z-index: 20;
-    }
-
-    .zones-list {
-        display: flex;
-        flex-direction: row;
-        gap: 12px;
-        overflow-x: auto;
-        padding-bottom: 8px;
-    }
-
-    .zone-item {
-        min-width: 220px;
-        margin-bottom: 0;
-        flex-shrink: 0;
-    }
-
-    .main-content {
-        padding: 20px;
-    }
-
-    .minimap-column {
-        border-left: none;
-        border-top: 1px solid var(--border);
-        padding: 20px;
-    }
-
-    .minimap-wrapper {
-        height: 350px;
-    }
 }
