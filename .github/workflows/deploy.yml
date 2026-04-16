@@ -25,9 +25,8 @@ jobs:
       - name: Subir artefacto
         uses: actions/upload-pages-artifact@v3
         with:
-          # Si moviste los archivos a la raíz, usa "."
-          # Si siguen en wwwroot, cambia esto por la ruta exacta
-          path: "C:\Users\Stiven\source\repos\campus-multimedia-uao\CampusUAO\CampusUAO\wwwroot"
+          # Ruta exacta relativa al repositorio de GitHub
+          path: "CampusUAO/CampusUAO/wwwroot"
 
       - name: Desplegar a GitHub Pages
         id: deployment
