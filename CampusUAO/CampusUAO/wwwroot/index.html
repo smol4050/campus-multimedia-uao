@@ -33,20 +33,20 @@
                 <h1>Campus UAO</h1>
                 <p>Memoria sensorial interactiva</p>
             </div>
-            <button id="theme-toggle" aria-label="Cambiar tema" class="icon-btn">☀️</button>
+            <button id="theme-toggle" class="icon-btn">☀️</button>
         </header>
 
         <nav id="filters-container" class="filters-bar"></nav>
 
         <main class="app-layout">
-            <aside id="sidebar" class="sidebar">
+            <aside class="sidebar">
                 <div id="zones-list" class="zones-list"></div>
             </aside>
 
-            <section id="content" class="main-content">
+            <section class="main-content">
                 <div id="empty-state" class="empty-state active">
                     <h2>Descubre el Campus</h2>
-                    <p>Selecciona una zona en el mapa, en la lista o explora aquí abajo:</p>
+                    <p>Selecciona una zona o explora aquí abajo:</p>
                     <div id="welcome-carousel" class="welcome-carousel"></div>
                 </div>
 
@@ -61,7 +61,7 @@
                     <p id="zone-description" class="description"></p>
 
                     <div class="actions-wrapper">
-                        <a id="zone-link" href="#" target="_blank" class="btn-secondary hidden" style="display: none;">
+                        <a id="zone-link" href="#" target="_blank" class="btn-secondary">
                             MÁS INFORMACIÓN DEL ESPACIO
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                         </a>
@@ -69,35 +69,24 @@
 
                     <div class="audio-player mt-4">
                         <div class="audio-header">
-                            <p class="audio-label">🎧 Escucha el ambiente:</p>
+                            <p class="audio-label">🎧 Ambiente:</p>
                             <div id="audio-visualizer" class="visualizer">
                                 <span></span><span></span><span></span><span></span><span></span>
                             </div>
                         </div>
-                        <audio id="zone-audio" controls controlsList="nodownload"></audio>
+                        <audio id="zone-audio" controls></audio>
                     </div>
                 </article>
             </section>
 
-            <aside id="minimap-column" class="minimap-column">
-                <div class="minimap-header">
-                    <h3>Ubicación</h3>
-                </div>
+            <aside class="minimap-column">
                 <div id="minimap-wrapper" class="minimap-wrapper glass-panel">
-                    <div id="map-container" style="width: 100%; height: 100%; z-index: 1;"></div>
-                    <button id="btn-close-map" class="btn-close-map hidden" aria-label="Cerrar mapa">&times;</button>
+                    <div id="map-container" style="width: 100%; height: 100%;"></div>
+                    <button id="btn-close-map" class="btn-close-map hidden">&times;</button>
                 </div>
-                <button id="btn-fullscreen-map" class="btn-secondary map-btn">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
-                    Abrir mapa completo
-                </button>
+                <button id="btn-fullscreen-map" class="btn-secondary">Abrir Mapa</button>
             </aside>
         </main>
-
-        <footer style="text-align: center; padding: 15px; font-size: 0.8rem; color: var(--text-muted); background: var(--bg-surface-solid); border-top: 1px solid var(--border); width: 100%; z-index: 20;">
-            <p>Proyecto Arquitectura de Sistemas Multimedia - UAO | Licencia MIT</p>
-            <p>Recursos multimedia bajo <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: bold;">CC BY 4.0</a>.</p>
-        </footer>
     </div>
 
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>

@@ -13,36 +13,38 @@
     zDesc: document.getElementById('zone-description'),
     zAudio: document.getElementById('zone-audio'),
     zLink: document.getElementById('zone-link'),
-    audioVisualizer: document.getElementById('audio-visualizer'),
-    minimapWrapper: document.getElementById('minimap-wrapper'),
-    btnCloseMap: document.getElementById('btn-close-map')
+    audioVisualizer: document.getElementById('audio-visualizer')
 };
 
 let galleryInterval = null;
 
-export const hideLoader = () => setTimeout(() => DOM.loader.classList.add('hidden'), 600);
+// Quita el cargador al inicio
+export const hideLoader = () => {
+    if (DOM.loader) {
+        DOM.loader.classList.add('hidden');
+    }
+};
 
+// Pasa de la pantalla de inicio a la app
 export const showApp = () => {
+    DOM.homeScreen.classList.remove('active');
     DOM.homeScreen.classList.add('hidden');
     DOM.appContainer.classList.remove('hidden');
 };
 
 export const initThemeUI = () => {
-    const savedTheme = localStorage.getItem('uao-theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark');
-        DOM.themeToggle.textContent = '☀️';
-    }
+    const isDark = localStorage.getItem('uao-theme') === 'dark';
+    if (isDark) document.body.classList.add('dark');
 };
 
 export const toggleThemeUI = () => {
     const isDark = document.body.classList.toggle('dark');
     localStorage.setItem('uao-theme', isDark ? 'dark' : 'light');
-    DOM.themeToggle.textContent = isDark ? '☀️' : '🌙';
 };
 
-/* Restauro el Carrusel de Bienvenida Original */
+// CARRUSEL DE BIENVENIDA (ORIGINAL)
 export const renderWelcomeCarousel = (zones, onZoneSelect) => {
+    if (!DOM.welcomeCarousel) return;
     DOM.welcomeCarousel.innerHTML = '';
     zones.forEach(zone => {
         const card = document.createElement('div');
@@ -75,13 +77,13 @@ export const renderZonesListUI = (zones, activeZoneId, onZoneSelect) => {
     zones.forEach(zone => {
         const btn = document.createElement('button');
         btn.className = `zone-item ${zone.id === activeZoneId ? 'active' : ''}`;
-        btn.innerHTML = `<span>${zone.category}</span><br><strong>${zone.name}</strong>`;
+        btn.innerHTML = `<strong>${zone.name}</strong><br><small>${zone.category}</small>`;
         btn.onclick = () => onZoneSelect(zone.id);
         DOM.zonesList.appendChild(btn);
     });
 };
 
-/* Detalle de Zona con Botón de Link y Videos Corregidos */
+// DETALLE DE ZONA (VIDEO CORREGIDO + BOTÓN LINK)
 export const renderZoneDetailUI = (zone) => {
     if (galleryInterval) clearInterval(galleryInterval);
 
@@ -89,20 +91,17 @@ export const renderZoneDetailUI = (zone) => {
     DOM.zDesc.textContent = zone.description;
     DOM.zCategory.textContent = zone.category;
 
-    // Botón de Link (Más información) restaurado
+    // Mostrar/Ocultar Link
     if (zone.link) {
         DOM.zLink.href = zone.link;
         DOM.zLink.style.display = 'inline-flex';
-        DOM.zLink.classList.remove('hidden');
     } else {
         DOM.zLink.style.display = 'none';
-        DOM.zLink.classList.add('hidden');
     }
 
-    DOM.zAudio.src = zone.audio;
+    DOM.zAudio.src = zone.audio || '';
     DOM.zAudio.load();
 
-    // Galería con Videos Corregidos
     const gallery = document.getElementById('media-gallery');
     gallery.innerHTML = '';
 
@@ -112,14 +111,12 @@ export const renderZoneDetailUI = (zone) => {
 
     let currentIdx = 0;
 
-    const renderMedia = () => {
+    const render = () => {
         gallery.innerHTML = `
             <div id="slides-wrapper">
                 ${media.map((m, i) => `
                     <div class="media-slide ${i === 0 ? 'active' : ''}">
-                        ${m.type === 'img'
-                ? `<img src="${m.src}">`
-                : `<video src="${m.src}" autoplay muted loop playsinline></video>`}
+                        ${m.type === 'img' ? `<img src="${m.src}">` : `<video src="${m.src}" autoplay muted loop playsinline></video>`}
                     </div>
                 `).join('')}
             </div>
@@ -127,29 +124,28 @@ export const renderZoneDetailUI = (zone) => {
                 <button class="gallery-btn" id="prev-slide">❮</button>
                 <button class="gallery-btn" id="next-slide">❯</button>
             </div>
-            <div class="gallery-dots">
-                ${media.map((_, i) => `<span class="dot ${i === 0 ? 'active' : ''}" data-idx="${i}"></span>`).join('')}
-            </div>
         `;
     };
 
-    const updateSlider = (newIdx) => {
+    if (media.length > 0) {
+        render();
         const slides = gallery.querySelectorAll('.media-slide');
-        const dots = gallery.querySelectorAll('.dot');
-        slides[currentIdx].classList.remove('active');
-        dots[currentIdx].classList.remove('active');
-        currentIdx = (newIdx + media.length) % media.length;
-        slides[currentIdx].classList.add('active');
-        dots[currentIdx].classList.add('active');
-    };
-
-    renderMedia();
-
-    gallery.querySelector('#next-slide').onclick = () => updateSlider(currentIdx + 1);
-    gallery.querySelector('#prev-slide').onclick = () => updateSlider(currentIdx - 1);
-
-    galleryInterval = setInterval(() => updateSlider(currentIdx + 1), 4000);
+        const update = (step) => {
+            slides[currentIdx].classList.remove('active');
+            currentIdx = (currentIdx + step + media.length) % media.length;
+            slides[currentIdx].classList.add('active');
+        };
+        gallery.querySelector('#next-slide').onclick = () => update(1);
+        gallery.querySelector('#prev-slide').onclick = () => update(-1);
+        galleryInterval = setInterval(() => update(1), 4000);
+    }
 
     DOM.emptyState.classList.add('hidden');
     DOM.zoneDetail.classList.remove('hidden');
+};
+
+// Necesaria para el botón de cerrar mapa si main.js la llama
+export const toggleFullscreenMap = (isFullscreen) => {
+    const wrapper = document.getElementById('minimap-wrapper');
+    if (wrapper) wrapper.classList.toggle('fullscreen', isFullscreen);
 };
