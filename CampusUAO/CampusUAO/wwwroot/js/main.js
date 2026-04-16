@@ -20,6 +20,8 @@ const initApp = async () => {
         const cats = new Set(data.map(z => z.category));
         AppState.categories = ['Todos', ...Array.from(cats)];
 
+        // Renderizamos el carrusel inicial
+        UI.renderWelcomeCarousel(AppState.zones, handleZoneSelect);
         updateView();
     } else {
         document.getElementById('zones-list').innerHTML = '<p style="color:red; padding: 20px;">Data loading failed.</p>';

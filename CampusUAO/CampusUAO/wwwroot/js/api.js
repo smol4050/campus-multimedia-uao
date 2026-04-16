@@ -1,6 +1,7 @@
 ﻿export const fetchZonesData = async () => {
     try {
-        const response = await fetch('data/zones.json');
+        const url = `data/zones.json?t=${new Date().getTime()}`;
+        const response = await fetch(url);
         if (!response.ok) throw new Error('Network response was not ok');
         return await response.json();
     } catch (error) {

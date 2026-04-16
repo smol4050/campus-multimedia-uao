@@ -1,7 +1,6 @@
 ﻿let map = null;
 let currentMarkers = [];
 
-// Variables integradas de Mapbox
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1Ijoic21vbDQwNTAiLCJhIjoiY21ueXh0djNjMDc3eDJxcG1hdjJ3cHE0eSJ9.zcn7z1InAFd0DwiVFSUTSA';
 const MAPBOX_STYLE = 'smol4050/cmnyy4dvn002401qtat3t8odt';
 
@@ -11,8 +10,8 @@ export const initMapUI = () => {
     map = new mapboxgl.Map({
         container: 'map-container',
         style: `mapbox://styles/${MAPBOX_STYLE}`,
-        center: [-76.5215, 3.3536], // Longitud primero
-        zoom: 16.5,
+        center: [-76.5218, 3.3535], // Centro ajustado a las 3 zonas
+        zoom: 17.5,
         pitch: 60,   // Inclinación 3D
         bearing: -20, // Rotación
         antialias: true
@@ -27,6 +26,7 @@ export const renderMarkersUI = (zones, onMarkerClick) => {
 
     zones.forEach(zone => {
         if (zone.lat && zone.lng) {
+            // Este es tu código original para las etiquetas Hover
             const popup = new mapboxgl.Popup({
                 offset: 25,
                 closeButton: false,
@@ -34,7 +34,8 @@ export const renderMarkersUI = (zones, onMarkerClick) => {
                 className: 'custom-map-popup'
             }).setText(zone.name);
 
-            const marker = new mapboxgl.Marker({ color: '#9c27b0' })
+            // Marcador en rojo institucional (#E20613)
+            const marker = new mapboxgl.Marker({ color: '#E20613' })
                 .setLngLat([zone.lng, zone.lat])
                 .addTo(map);
 
