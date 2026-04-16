@@ -1,8 +1,8 @@
-name: Deploy Escuchando el Campus UAO
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
 
 permissions:
   contents: read
@@ -11,23 +11,19 @@ permissions:
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout del código
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configurar GitHub Pages
+      - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: Subir artefacto
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Ruta exacta relativa al repositorio de GitHub
-          path: "CampusUAO/CampusUAO/wwwroot"
+          path: CampusUAO/CampusUAO/wwwroot
 
-      - name: Desplegar a GitHub Pages
-        id: deployment
+      - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
