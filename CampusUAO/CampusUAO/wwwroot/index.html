@@ -22,7 +22,10 @@
             <p class="home-subtitle">Descubre la identidad sensorial, visual y sonora de nuestra universidad a través de un recorrido interactivo.</p>
             <button id="btn-explore" class="btn-primary">
                 <span>Explorar ahora</span>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
             </button>
         </div>
     </section>
@@ -33,7 +36,7 @@
                 <h1>Campus UAO</h1>
                 <p>Memoria sensorial interactiva</p>
             </div>
-            <button id="theme-toggle" class="icon-btn">☀️</button>
+            <button id="theme-toggle" class="icon-btn">🌙</button>
         </header>
 
         <nav id="filters-container" class="filters-bar"></nav>
@@ -56,14 +59,19 @@
                     </div>
                     <h2 id="zone-title"></h2>
 
-                    <div class="media-gallery" id="media-gallery"></div>
+                    <div class="media-gallery" id="media-gallery">
+                    </div>
 
                     <p id="zone-description" class="description"></p>
 
                     <div class="actions-wrapper">
                         <a id="zone-link" href="#" target="_blank" class="btn-secondary">
                             MÁS INFORMACIÓN DEL ESPACIO
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
                         </a>
                     </div>
 
@@ -84,7 +92,7 @@
                     <div id="map-container" style="width: 100%; height: 100%;"></div>
                     <button id="btn-close-map" class="btn-close-map hidden">&times;</button>
                 </div>
-                <button id="btn-fullscreen-map" class="btn-secondary">Abrir Mapa</button>
+                <button id="btn-fullscreen-map" class="btn-secondary map-btn">Abrir Mapa</button>
             </aside>
         </main>
     </div>

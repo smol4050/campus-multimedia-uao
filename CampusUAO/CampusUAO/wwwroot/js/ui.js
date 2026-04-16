@@ -18,7 +18,8 @@
     btnCloseMap: document.getElementById('btn-close-map')
 };
 
-let galleryInterval = null;
+// Se renombra a galleryTimeout por precisión técnica
+let galleryTimeout = null;
 let currentVideo = null;
 
 /* ================= AUDIO ================= */
@@ -65,7 +66,6 @@ export const toggleThemeUI = () => {
 };
 
 /* ================= UI ================= */
-
 export const renderFiltersUI = (categories, currentFilter, onFilterClick) => {
     DOM.filtersContainer.innerHTML = '';
     categories.forEach(cat => {
@@ -82,7 +82,8 @@ export const renderZonesListUI = (zones, activeZoneId, onZoneSelect) => {
     zones.forEach(zone => {
         const btn = document.createElement('button');
         btn.className = `zone-item ${zone.id === activeZoneId ? 'active' : ''}`;
-        btn.innerHTML = `<span>${zone.name}</span>`;
+        btn.innerHTML = `<span class="zone-item-cat">${zone.category}</span>
+                         <span class="zone-item-title">${zone.name}</span>`;
         btn.onclick = () => onZoneSelect(zone.id);
         DOM.zonesList.appendChild(btn);
     });
@@ -93,16 +94,20 @@ export const renderWelcomeCarousel = (zones, onZoneSelect) => {
     zones.forEach(zone => {
         const card = document.createElement('div');
         card.className = 'carousel-card';
-        card.innerHTML = `<img src="${zone.images?.[0] || zone.image}">`;
+        card.innerHTML = `<img src="${zone.images?.[0] || zone.image}" class="carousel-img">
+                         <div class="carousel-info">
+                            <span>${zone.category}</span>
+                            <h4>${zone.name}</h4>
+                         </div>`;
         card.onclick = () => onZoneSelect(zone.id);
         DOM.welcomeCarousel.appendChild(card);
     });
 };
 
-/* ================= GALERÍA PRO ================= */
-
+/* ================= GALERÍA PRO CORREGIDA ================= */
 export const renderZoneDetailUI = (zone) => {
-    clearInterval(galleryInterval);
+    // Limpieza de procesos previos
+    clearTimeout(galleryTimeout);
     if (currentVideo) {
         currentVideo.pause();
         currentVideo = null;
@@ -116,63 +121,63 @@ export const renderZoneDetailUI = (zone) => {
     gallery.innerHTML = "";
 
     let media = [];
-
-    if (zone.images) {
-        zone.images.forEach(i => media.push({ type: 'image', src: i }));
-    }
-
-    if (zone.videos) {
-        zone.videos.forEach(v => media.push({ type: 'video', src: v }));
-    }
+    if (zone.images) zone.images.forEach(i => media.push({ type: 'image', src: i }));
+    if (zone.videos) zone.videos.forEach(v => media.push({ type: 'video', src: v }));
 
     let index = 0;
 
     const render = () => {
-        gallery.innerHTML = media.map((m, i) => `
-            <div class="media-slide ${i === 0 ? 'active' : ''}">
-                ${m.type === 'image'
+        gallery.innerHTML = `
+            <div id="slides-wrapper">
+                ${media.map((m, i) => `
+                    <div class="media-slide ${i === 0 ? 'active' : ''}">
+                        ${m.type === 'image'
                 ? `<img src="${m.src}">`
-                : `<video muted playsinline preload="auto">
-                        <source src="${m.src}" type="video/mp4">
-                   </video>`}
+                : `<video muted playsinline autoplay preload="auto">
+                                <source src="${m.src}" type="video/mp4">
+                           </video>`}
+                    </div>
+                `).join('')}
             </div>
-        `).join('') + `
-        <div class="gallery-controls">
-            <button class="gallery-btn" id="prev">‹</button>
-            <button class="gallery-btn" id="next">›</button>
-        </div>
+            <div class="gallery-controls">
+                <button class="gallery-btn" id="prev">‹</button>
+                <button class="gallery-btn" id="next">›</button>
+            </div>
+            <div class="gallery-dots">
+                ${media.map((_, i) => `<span class="dot ${i === 0 ? 'active' : ''}" data-idx="${i}"></span>`).join('')}
+            </div>
         `;
     };
 
     const update = () => {
+        clearTimeout(galleryTimeout);
         const slides = gallery.querySelectorAll(".media-slide");
-        slides.forEach((s, i) => s.classList.toggle("active", i === index));
+        const dots = gallery.querySelectorAll(".dot");
 
-        const active = slides[index];
-        const video = active.querySelector("video");
+        slides.forEach((s, i) => s.classList.toggle("active", i === index));
+        dots.forEach((d, i) => d.classList.toggle("active", i === index));
+
+        const activeSlide = slides[index];
+        const video = activeSlide.querySelector("video");
 
         if (video) {
             currentVideo = video;
             video.currentTime = 0;
-            video.play().catch(() => { });
-
-            video.onended = () => {
-                next();
-            };
+            // Se usa promesa para manejar políticas de autoplay
+            video.play().catch(err => console.log("Autoplay prevent: user interaction needed."));
+            video.onended = () => next();
         } else {
             currentVideo = null;
-            galleryInterval = setTimeout(next, 3000);
+            galleryTimeout = setTimeout(next, 4000);
         }
     };
 
     const next = () => {
-        clearTimeout(galleryInterval);
         index = (index + 1) % media.length;
         update();
     };
 
     const prev = () => {
-        clearTimeout(galleryInterval);
         index = (index - 1 + media.length) % media.length;
         update();
     };
@@ -180,9 +185,14 @@ export const renderZoneDetailUI = (zone) => {
     render();
     update();
 
+    // Eventos de controles
     gallery.onclick = (e) => {
         if (e.target.id === "next") next();
         if (e.target.id === "prev") prev();
+        if (e.target.classList.contains("dot")) {
+            index = parseInt(e.target.dataset.idx);
+            update();
+        }
     };
 
     /* LINK */
