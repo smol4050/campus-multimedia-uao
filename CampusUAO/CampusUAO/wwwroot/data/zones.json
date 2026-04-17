@@ -12,7 +12,7 @@
       "assets/videos/Cafeteria_1.mp4",
       "assets/videos/Cafeteria_2.mp4"
     ],
-    "audio": "assets/audio/a.mp3",
+    "audio": "assets/audio/CRAI_audio.mp3",
     "category": "Académico",
     "lat": 3.353467934693791,
     "lng": -76.52245040538195
@@ -30,7 +30,7 @@
       "assets/videos/Cafeteria_1.mp4",
       "assets/videos/Cafeteria_2.mp4"
     ],
-    "audio": "assets/audio/a.mp3",
+    "audio": "assets/audio/Cafe_audio.mp3",
     "category": "Social",
     "lat": 3.353522,
     "lng": -76.520752
@@ -48,7 +48,7 @@
       "assets/videos/Labs.mp4",
       "assets/videos/Cafeteria_2.mp4"
     ],
-    "audio": "assets/audio/a.mp3",
+    "audio": "assets/audio/Labs_audio.mp3",
     "category": "Académico",
     "lat": 3.3536748605340994,
     "lng": -76.52224516576563
