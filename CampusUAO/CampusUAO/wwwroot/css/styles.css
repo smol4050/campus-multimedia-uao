@@ -892,3 +892,39 @@ audio {
         font-size: 0.85rem;
     }
 }
+
+/* ================= MAP TOOLTIP PRO ================= */
+
+.custom-map-popup .mapboxgl-popup-content {
+    background: rgba(20,20,20,0.95);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    backdrop-filter: blur(6px);
+    text-align: center;
+}
+
+/* quitar padding raro default */
+.mapboxgl-popup-content {
+    padding: 0 !important;
+}
+
+/* flechita */
+.custom-map-popup .mapboxgl-popup-tip {
+    border-top-color: rgba(20,20,20,0.95);
+}
+
+/* animación suave */
+.mapboxgl-popup {
+    transform: translateY(-5px);
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+    .mapboxgl-popup.mapboxgl-popup-anchor-bottom {
+        opacity: 1;
+        transform: translateY(0);
+    }
